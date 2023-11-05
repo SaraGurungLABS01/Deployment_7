@@ -2,7 +2,7 @@ FROM python:3.7
 
 RUN git clone https://github.com/SaraGurungLABS01/Deployment_7.git
 
-WORKDIR deploy_7
+WORKDIR Deployment_7
 
 RUN pip install pip --upgrade
 
