@@ -4,6 +4,9 @@ RUN git clone https://github.com/SaraGurungLABS01/Deployment_7.git
 
 WORKDIR Deployment_7
 
+RUN pip install pip --upgrade
+
+
 RUN pip install -r requirements.txt
 
 RUN pip install mysqlclient
