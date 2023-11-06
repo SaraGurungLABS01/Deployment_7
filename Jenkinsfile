@@ -28,7 +28,7 @@ pipeline {
      
     stage ('Build') {
       steps {
-          sh 'docker build -t tsanderson77/bankapp11 .'
+          sh 'docker build -t saragurunglabs01/bankapp11 .'
     }
 }
      stage ('Login') {
@@ -39,7 +39,7 @@ pipeline {
 
      stage ('Push') {
         steps {
-            sh 'docker push tsanderson77/bankapp11'
+            sh 'docker push saragurunglabs01/bankapp11'
   }
      }
 
