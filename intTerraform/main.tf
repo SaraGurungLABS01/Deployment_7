@@ -29,7 +29,7 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
   container_definitions = <<EOF
   [
   {
-      "name": "bankapp_d7_container",
+      "name": "bankapp-d7-container",
       "image": "saragurunglabs01/bankapp:latest",
       "logConfiguration": {
         "logDriver": "awslogs",
