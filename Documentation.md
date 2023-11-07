@@ -204,4 +204,17 @@ Trouble Shooting : Add user to the Docker group: ```bash sudo usermod -aG docker
 
 ## Conclusion
 
+**Is your infrastructure secure? if yes or no, why?**
+
+It is secure as the main infrastructure resides in the private subnet.
+
+**What happens when you terminate 1 instance? Is this infrastructure fault-tolerant?**
+Yes, this infrastructure is fault tolerant. The architecture automatically maintains service continuity by leveraging Terraform's configuration settings, setting 'desired_count' to 2, enabling 'force_new_deployment,' and utilizing the 'scheduling_strategy' as 'REPLICA,' ensuring the creation of another container instance upon termination.
+
+**Which subnet were the containers deployed in?**
+
+Containers were deployed in private subnets
+
+
+
 
