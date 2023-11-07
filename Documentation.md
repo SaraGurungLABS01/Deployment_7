@@ -178,3 +178,11 @@ Result: Successful
 2. **Plan:** Analyzing and determining resources required for infrastructure provisioning, identifying those to be created or destroyed.
 3. **Apply:** Executing provisioning tasks based on the plan, creating the application infrastructure with a detailed summary of successfully created resources.
 
+## Issues
+
+1) Initially did not pass the build stage. 
+<img width="1393" alt="Screen Shot 2023-11-06 at 9 17 47 PM" src="https://github.com/SaraGurungLABS01/Deployment_7/assets/140760966/aa9da29a-ec13-43ee-8d7c-4eae021334d8">
+
+It indicates a permission issue while trying to interact with the Docker daemon
+
+Trouble Shooting : Add user to the Docker group: ```bash sudo usermod -aG docker ubuntu``` followed by ```bash newgrp docker ```
