@@ -215,6 +215,8 @@ Yes, this infrastructure is fault tolerant. The architecture automatically maint
 
 Containers were deployed in private subnets
 
+## System Diagram
 
+<img width="1261" alt="Screen Shot 2023-11-06 at 10 56 01 PM" src="https://github.com/SaraGurungLABS01/Deployment_7/assets/140760966/881274dd-7ebd-4d3c-9b80-83acfc9c569e">
 
 
