@@ -55,7 +55,7 @@ Terraform was used to create a Jenkins manager and agents architecture within a 
 
 # Other terraform files that are used:
 
-**VPC.tf**
+### VPC.tf
 
 VPC.tf is creating AWS resources for setting up a network infrastructure with following resources:
 - 2 Availability Zones (AZs)
@@ -66,7 +66,7 @@ VPC.tf is creating AWS resources for setting up a network infrastructure with fo
 - Security Group Ports: 8000
 - Security Group Ports: 80
 
-**ALB.tf**
+### ALB.tf
 
 ALB.tf is creating and configuring resources for setting up an Application Load Balancer (ALB) and a Target Group
 
@@ -89,22 +89,22 @@ ALB.tf is creating and configuring resources for setting up an Application Load 
 - Forwards incoming requests to the "url-app" Target Group.
 
 
-**main.tf**
+### main.tf
 
 
-The main.tf is used to configure an Amazon ECS (Elastic Container Service) cluster for deploying containerized applications. It includes several components:
+The main.tf is used to configure an Amazon ECS (Elastic Container Service) cluster for deploying containerized applications. This Terraform configuration is used for managing ECS services in AWS, providing a foundation for containerized application deployment and management. It includes several components:
 
-### ECS Cluster
+**ECS Cluster**
 
 - Creates an ECS cluster named "urlapp-cluster."
 - Assigns tags for identification.
 
-### CloudWatch Log Group
+**CloudWatch Log Group**
 
 - Defines a CloudWatch log group named "/ecs/bank-logs."
 - Tags the log group with the "Application" tag set to "bank-app."
 
-### Task Definition
+**Task Definition**
 
 - Defines an ECS task definition named "bankapp_d7-task."
 - Configures a container within the task definition, specifying:
@@ -116,7 +116,7 @@ The main.tf is used to configure an Amazon ECS (Elastic Container Service) clust
 - Allocates memory (1024 MB) and CPU (512 units).
 - Specifies execution and task roles.
 
-### ECS Service
+**ECS Service**
 
 - Sets up an ECS service named "bankapp-ecs-service-d7."
 - Associates it with the previously defined cluster, task definition, and other parameters.
@@ -127,6 +127,54 @@ The main.tf is used to configure an Amazon ECS (Elastic Container Service) clust
 - Defines network configuration for subnets and security groups.
 - Configures a load balancer with a target group, container name, and port.
 
-This Terraform configuration is used for managing ECS services in AWS, providing a foundation for containerized application deployment and management.
 
+## Jenkins Manager and Agent
+
+Jenkins is an open-source automation server used for continuous integration (CI) and continuous delivery (CD) of software applications. It provides a framework to automate the building, testing, and deployment of software, enabling teams to integrate and deliver code more rapidly and efficiently.
+
+Jenkins agents streamline CI/CD with parallel execution, resource isolation, and cross-platform support. They scale effortlessly, adapt to diverse project needs, and speed up testing. This efficiency reduces infrastructure costs and enhances reliability. Agents also support collaborative work and bolster security by controlling access and permissions.
+
+### Jenkin Agent Nodes 
+
+**awsdeploy2 - Docker Node**
+Handles activities like testing the application, building the Docker image, and uploading it to Docker Hub.
+
+**awsdeploy - Terraform Node**
+Creates the entire application infrastructure.
+
+[Step-by-Step Guide - Creating an Agent in Jenkins](https://scribehow.com/shared/Step-by-step_Guide_Creating_an_Agent_in_Jenkins__xeyUT01pSAiWXC3qN42q5w)
+
+### Jenkin Credentials
+
+To ensure Terraform's access to AWS, it necessitates both AWS access and secret keys. Given that the terraform files reside on GitHub, where public access should be restricted for security reasons, AWS credentials are created within Jenkins. Configuring AWS credentials within Jenkins is crucial as it fosters the integration of AWS services into your automation workflows, ensuring secure access to resources. Likewise, Docker Hub credentials, encompassing a username and password, are also established. These credentials are essential for secure interactions with Docker Hub, enabling your applications to be efficiently built, tested, and pushed to the container registry. 
+
+**AWS**
+
+To securely configure AWS credentials in Jenkins for the automation purpose, please refer to the following link for step-by-step instructions: [How to Configure AWS credentials in  Jenkins](https://scribehow.com/shared/How_to_Securely_Configure_AWS_Access_Keys_in_Jenkins__MNeQvA0RSOWj4Ig3pdzIPw)https://scribehow.com/shared/How_to_Securely_Configure_AWS_Access_Keys_in_Jenkins__MNeQvA0RSOWj4Ig3pdzIPw
+
+**Docker Hub**
+
+Follow the steps above, just make sure to select username and password for kind and add your dockerhub credentials
+
+## Creating a multibranch pipeline and running the Jenkinsfile
+
+Created a multi branch pipeline to run the Jenkinsfile and deploy the Retail Banking application 
+
+Result: Successful
+
+<img width="1331" alt="Screen Shot 2023-11-06 at 8 07 59 PM" src="https://github.com/SaraGurungLABS01/Deployment_7/assets/140760966/a719b141-5cb0-4e4f-a6d4-67470c4acf64">
+<img width="1595" alt="Screen Shot 2023-11-06 at 8 08 42 PM" src="https://github.com/SaraGurungLABS01/Deployment_7/assets/140760966/9d57fe42-04da-427d-9989-b676ae41f727">
+
+## Understanding the stages
+
+**Docker_node:**
+1. **Test Stage:** Application testing on an EC2 instance with error identification and resolution.
+2. **Build Stage:** Creation of a Docker image using the Dockerfile, ensuring a consistent package for the application.
+3. **Login to Docker Hub:** Securely logging into Docker Hub for interactions with Jenkins-installed credentials.
+4. **Push to Docker Hub:** Successful image upload to the Docker Hub repository, enabling distribution and deployment.
+
+**Terraform_node:**
+1. **Initialize:** Setting the groundwork for Terraform to manage infrastructure.
+2. **Plan:** Analyzing and determining resources required for infrastructure provisioning, identifying those to be created or destroyed.
+3. **Apply:** Executing provisioning tasks based on the plan, creating the application infrastructure with a detailed summary of successfully created resources.
 
