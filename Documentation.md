@@ -1,5 +1,6 @@
 ## Purpose
 
+The purpose of this deployment is to establish a cloud-based infrastructure for a banking application. It involves using Jenkins for automation, Terraform for resource management, Amazon RDS for secure data storage, and Docker for creating and hosting the application image. This deployment streamlines application operations, ensuring efficiency, security, and data continuity.
 
 ## Downloading and uploading the files to a new repository
 
@@ -128,6 +129,14 @@ The main.tf is used to configure an Amazon ECS (Elastic Container Service) clust
 - Configures a load balancer with a target group, container name, and port.
 
 
+## AWS RDS Database
+
+For a detailed setup guide, please follow the step-by-step instructions provided in the link below:
+
+[How to Create an AWS RDS Database](https://scribehow.com/shared/How_to_Create_an_AWS_RDS_Database__zqPZ-jdRTHqiOGdhjMI8Zw)
+
+Amazon Relational Database Service (Amazon RDS) is a fully managed web service offered by AWS, simplifying the setup, operation, and scaling of relational databases in the cloud. It plays a crucial role in applications, ensuring the seamless continuity of user data across various tasks. This involves comprehensive integration of the database within the application, covering critical elements such as username, password, and endpoint, to facilitate consistent and reliable interaction with the database in the AWS Cloud environment.
+
 ## Jenkins Manager and Agent
 
 Jenkins is an open-source automation server used for continuous integration (CI) and continuous delivery (CD) of software applications. It provides a framework to automate the building, testing, and deployment of software, enabling teams to integrate and deliver code more rapidly and efficiently.
@@ -186,3 +195,13 @@ Result: Successful
 It indicates a permission issue while trying to interact with the Docker daemon
 
 Trouble Shooting : Add user to the Docker group: ```bash sudo usermod -aG docker ubuntu``` followed by ```bash newgrp docker ```
+
+## Optimization 
+
+1. **Geographical Redundancy:** Implement Multi-Availability Zone (Multi-AZ) deployments to ensure high availability and disaster recovery. Distribute resources across different AWS regions to maintain service continuity in the event of a region-wide outage. Utilize Amazon Route 53 for intelligent global traffic routing, directing users to the nearest healthy instance for reduced latency.
+
+2. **Auto Scaling:** Set up auto scaling policies for AWS resources, especially the application servers and database instances. This ensures that resources can automatically scale up or down based on workload demands, optimizing performance during peak usage and reducing costs during low traffic periods. Properly configured auto scaling minimizes over-provisioning and underutilization of resources, resulting in cost savings and improved application responsiveness.
+
+## Conclusion
+
+
